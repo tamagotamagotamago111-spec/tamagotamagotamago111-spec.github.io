@@ -1114,10 +1114,18 @@
 
     // 高品質な音声を選択する強化版関数
     function speak(text) {
-        if (!synth) return;
-        synth.cancel();
-        const uttr = new SpeechSynthesisUtterance(text);
-        const voices = synth.getVoices();
+        // 合成音声ではなく、audioフォルダ内のmp3を再生する
+        const fileName = text.toLowerCase().replace(/ /g, "_");
+        const audio = new Audio(`audio/${fileName}.mp3`);
+        
+        audio.play().catch(err => {
+            console.log("再生エラー（ファイルがない等）:", err);
+            // ファイルがない時だけ、予備としてブラウザの音声を使う
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'es-ES';
+            window.speechSynthesis.speak(uttr);
+        });
+    }
         
         // スペイン語の「高品質(Premium/Enhanced/Siri)」な声を探す
         let selectedVoice = voices.find(v => 
