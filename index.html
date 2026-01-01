@@ -1089,24 +1089,39 @@
     
     let currentIndex = 0;
     const synth = window.speechSynthesis;
-     function speak(text) {
-    // 読み上げ中なら停止させる
+    <script>
+function speak(text) {
+    // 1. 今しゃべっている声を止める
     window.speechSynthesis.cancel();
 
     const uttr = new SpeechSynthesisUtterance(text);
     
-    // 全ての利用可能な声のリストを取得
+    // 2. iPhoneの中にある「高品質な声」を探す指示
     const voices = window.speechSynthesis.getVoices();
     
-    // スペイン語（es-ES または es-MX）の中で、できるだけ「Google」や「Enhanced（高品質）」と名の付くものを探す
-    const spanishVoice = voices.find(voice => 
-        (voice.lang.includes('es-ES') || voice.lang.includes('es-MX')) && 
-        (voice.name.includes('Google') || voice.name.includes('Premium') || voice.name.includes('Enhanced'))
-    ) || voices.find(voice => voice.lang.includes('es')); // 見つからなければ普通のスペイン語
+    // 「Monica」や「Siri」など、iPhone特有の高品質な声を探す
+    const highQualityVoice = voices.find(v => 
+        v.lang.includes('es') && 
+        (v.name.includes('Premium') || v.name.includes('Enhanced') || v.name.includes('拡張'))
+    );
 
-    if (spanishVoice) {
-        uttr.voice = spanishVoice;
+    if (highQualityVoice) {
+        uttr.voice = highQualityVoice;
     }
+
+    uttr.lang = 'es-ES'; // スペイン（本国）の発音に設定
+    uttr.rate = 0.85;    // 少しだけゆっくりにすると、iPhoneでは綺麗に聞こえます
+    uttr.pitch = 1.0;
+
+    // 3. しゃべる
+    window.speechSynthesis.speak(uttr);
+}
+
+// ページを読み込んだ時に声を準備するおまじない
+window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+};
+</script>
 
     uttr.lang = 'es-ES'; // 言語コードを固定
     uttr.rate = 0.9;     // 少しゆっくりにすると聞き取りやすくなる
