@@ -1,92 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
-     <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1313663524693433"
-     crossorigin="anonymous"></script>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spanish Master 250</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <title>Spanish Master 1200</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1313663524693433" crossorigin="anonymous"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+    
     <style>
         :root { --primary: #ff4757; --secondary: #2ed573; --bg: #f1f2f6; --text: #2f3542; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .header { background: #fff; width: 100%; padding: 15px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-weight: 800; font-size: 22px; }
+        body { 
+            font-family: sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+            -webkit-user-select: none; /* テキスト選択を禁止してアプリ感を出す */
+        }
+        .header { background: #fff; width: 100%; padding: 20px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-weight: 800; font-size: 22px; }
         .progress { margin: 15px; font-size: 16px; color: #fff; background: var(--text); padding: 5px 25px; border-radius: 50px; font-weight: bold; }
-        .card { width: 90%; max-width: 400px; height: 420px; background: white; border-radius: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center; padding: 20px; border: 1px solid #eee; }
+        .card { width: 90%; max-width: 400px; height: 420px; background: white; border-radius: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center; padding: 20px; border: 1px solid #eee; transition: transform 0.1s; }
+        .card:active { transform: scale(0.98); } /* タップした時の反応 */
         .icon-box { font-size: 100px; color: var(--primary); margin-bottom: 10px; }
         .sp-text { font-size: 38px; font-weight: 900; color: var(--text); margin: 10px 0; }
         .jp-text { font-size: 22px; color: var(--secondary); font-weight: 700; height: 30px; }
         .speaker-btn { background: var(--primary); border: none; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 15px; }
         .speaker-btn span { font-size: 30px; color: white; }
         .controls { display: flex; gap: 10px; width: 90%; max-width: 400px; margin-top: 20px; }
-        .btn { flex: 1; padding: 15px 0; border-radius: 15px; border: none; color: white; font-size: 16px; font-weight: 800; cursor: pointer; }
+        .btn { flex: 1; padding: 15px 0; border-radius: 15px; border: none; color: white; font-size: 16px; font-weight: 800; cursor: pointer; transition: opacity 0.2s; }
+        .btn:active { opacity: 0.7; }
         .btn-prev { background: #a4b0be; }
         .btn-next { background: var(--text); }
         .hidden { visibility: hidden; opacity: 0; }
     </style>
-     <link rel="manifest" href="manifest.json">
-<script>
-// 音声再生のメイン関数
-function speak(text) {
-    if (!window.speechSynthesis) {
-        alert("このブラウザは音声再生に対応していません。");
-        return;
-    }
-
-    // 再生中の音をリセット
-    window.speechSynthesis.cancel();
-
-    const uttr = new SpeechSynthesisUtterance(text);
-    const voices = window.speechSynthesis.getVoices();
-
-    // iPhoneの高品質な声（拡張/Premium/Siri）を優先的に探す
-    const highQualityVoice = voices.find(v => 
-        v.lang.includes('es') && 
-        (v.name.includes('Premium') || v.name.includes('Enhanced') || v.name.includes('拡張') || v.name.includes('Siri'))
-    );
-
-    if (highQualityVoice) {
-        uttr.voice = highQualityVoice;
-    }
-
-    uttr.lang = 'es-ES'; 
-    uttr.rate = 0.85;    
-    uttr.pitch = 1.0;
-
-    window.speechSynthesis.speak(uttr);
-}
-
-// iPhoneで声を正しく読み込むための準備
-window.speechSynthesis.onvoiceschanged = () => {
-    window.speechSynthesis.getVoices();
-};
-
-// 初回クリック時に音声を有効化する（iPhoneの制限対策）
-document.body.addEventListener('touchstart', function() {
-    const silent = new SpeechSynthesisUtterance("");
-    window.speechSynthesis.speak(silent);
-}, { once: true });
-</script>
 </head>
 <body>
-<div class="header">SPANISH 250 MASTER</div>
-<div id="counter" class="progress">...</div>
-<div class="card" onclick="toggleAnswer()">
-    <span class="material-symbols-rounded icon-box" id="icon">school</span>
-    <div class="sp-text" id="sp">...</div>
-    <div class="jp-text hidden" id="jp">...</div>
-    <button class="speaker-btn" onclick="event.stopPropagation(); playVoice();">
-        <span class="material-symbols-rounded">volume_up</span>
-    </button>
-</div>
-<div class="controls">
-    <button class="btn btn-prev" onclick="prevWord()">← PREV</button>
-    <button class="btn btn-next" onclick="nextWord()">NEXT →</button>
-</div>
-<script>
+    <div class="header">SPANISH 1200 MASTER</div>
+    <div id="counter" class="progress">...</div>
+    
+    <div class="card" onclick="toggleAnswer()">
+        <span class="material-symbols-rounded icon-box" id="icon">school</span>
+        <div class="sp-text" id="sp">...</div>
+        <div class="jp-text hidden" id="jp">...</div>
+        <button class="speaker-btn" onclick="event.stopPropagation(); playVoice();">
+            <span class="material-symbols-rounded">volume_up</span>
+        </button>
+    </div>
+    
+    <div class="controls">
+        <button class="btn btn-prev" onclick="prevWord()">← PREV</button>
+        <button class="btn btn-next" onclick="nextWord()">NEXT →</button>
+    </div>
+
+    <script>
+    const vocabulary = [
     const vocabulary = [
         {sp: "Hola", jp: "こんにちは", icon: "handshake"},
         {sp: "Gracias", jp: "ありがとう", icon: "volunteer_activism"},
@@ -1124,107 +1098,111 @@ document.body.addEventListener('touchstart', function() {
         {sp: "Infinito", jp: "無限", icon: "all_inclusive"}
     ];
     
-    let currentIndex = 0;
-    const synth = window.speechSynthesis;
     <script>
-function speak(text) {
-    // 1. 今しゃべっている声を止める
-    window.speechSynthesis.cancel();
+        // --- 設定と変数 ---
+        let currentIndex = 0;
+        const synth = window.speechSynthesis;
 
-    const uttr = new SpeechSynthesisUtterance(text);
-    
-    // 2. iPhoneの中にある「高品質な声」を探す指示
-    const voices = window.speechSynthesis.getVoices();
-    
-    // 「Monica」や「Siri」など、iPhone特有の高品質な声を探す
-    const highQualityVoice = voices.find(v => 
-        v.lang.includes('es') && 
-        (v.name.includes('Premium') || v.name.includes('Enhanced') || v.name.includes('拡張'))
-    );
+        // --- iPhone・スマホ用 高品質音声再生エンジン ---
+        function speak(text) {
+            if (!synth) return;
+            
+            // 再生中の音をキャンセル
+            synth.cancel();
 
-    if (highQualityVoice) {
-        uttr.voice = highQualityVoice;
-    }
+            const uttr = new SpeechSynthesisUtterance(text);
+            const voices = synth.getVoices();
 
-    uttr.lang = 'es-ES'; // スペイン（本国）の発音に設定
-    uttr.rate = 0.85;    // 少しだけゆっくりにすると、iPhoneでは綺麗に聞こえます
-    uttr.pitch = 1.0;
+            // iPhoneの高品質な声（拡張/Premium/Siri）を優先的に探す
+            const highQualityVoice = voices.find(v => 
+                v.lang.includes('es') && 
+                (v.name.includes('Premium') || v.name.includes('Enhanced') || v.name.includes('拡張') || v.name.includes('Siri'))
+            );
 
-    // 3. しゃべる
-    window.speechSynthesis.speak(uttr);
-}
+            if (highQualityVoice) {
+                uttr.voice = highQualityVoice;
+            }
 
-// ページを読み込んだ時に声を準備するおまじない
-window.speechSynthesis.onvoiceschanged = () => {
-    window.speechSynthesis.getVoices();
-};
-</script>
+            uttr.lang = 'es-ES';
+            uttr.rate = 0.85; // iPhoneで聞き取りやすい速度
+            uttr.pitch = 1.0;
 
-    uttr.lang = 'es-ES'; // 言語コードを固定
-    uttr.rate = 0.9;     // 少しゆっくりにすると聞き取りやすくなる
-    uttr.pitch = 1.0;
+            synth.speak(uttr);
+        }
 
-    window.speechSynthesis.speak(uttr);
-}
+        // --- 画面表示の更新 ---
+        function updateDisplay() {
+            const item = vocabulary[currentIndex];
+            document.getElementById('sp').innerText = item.sp;
+            document.getElementById('jp').innerText = item.jp;
+            document.getElementById('icon').innerText = item.icon;
+            document.getElementById('jp').classList.add('hidden');
+            document.getElementById('counter').innerText = `${currentIndex + 1} / ${vocabulary.length}`;
+            
+            // 次の単語に行った時に自動でしゃべる
+            speak(item.sp);
+        }
 
-// ブラウザが声を読み込むまで時間がかかることがあるための対策
-window.speechSynthesis.onvoiceschanged = () => {
-    window.speechSynthesis.getVoices();
-};
-    function updateDisplay() {
-        const item = vocabulary[currentIndex];
-        document.getElementById('sp').innerText = item.sp;
-        document.getElementById('jp').innerText = item.jp;
-        document.getElementById('icon').innerText = item.icon;
-        document.getElementById('jp').classList.add('hidden');
-        document.getElementById('counter').innerText = `${currentIndex + 1} / ${vocabulary.length}`;
-        playVoice();
-    }
-    function toggleAnswer() { document.getElementById('jp').classList.toggle('hidden'); }
-    function nextWord() { currentIndex = (currentIndex + 1) % vocabulary.length; updateDisplay(); }
-    function prevWord() { currentIndex = (currentIndex - 1 + vocabulary.length) % vocabulary.length; updateDisplay(); }
-    function playVoice() {
-        if (synth.speaking) synth.cancel();
-        const uttr = new SpeechSynthesisUtterance(vocabulary[currentIndex].sp);
-        uttr.lang = 'es-ES';
-        synth.speak(uttr);
-    }
-    window.onload = updateDisplay;
-</script>
-</body>
-<div style="text-align: center; padding: 20px; font-size: 12px; color: #666;">
-    <a href="javascript:void(0)" onclick="document.getElementById('policy-modal').style.display='block'" style="color: #666; text-decoration: none;">プライバシーポリシー・免責事項</a>
-</div>
+        // --- ボタン操作 ---
+        function toggleAnswer() { 
+            document.getElementById('jp').classList.toggle('hidden'); 
+        }
 
-<div id="policy-modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
-    <div style="background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 10px; line-height: 1.6; font-size: 14px; color: #333;">
-        <span onclick="document.getElementById('policy-modal').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
-        <div style="text-align:center; margin-top:20px;">
- <a href="https://forms.gle/abc12345" target="_blank" style="color:#666; font-size:14px;">
-  お問い合わせ
-</a>
-</div>
-        <h2>プライバシーポリシー・免責事項</h2>
-       
-        <h3>1. 広告の配信について</h3>
-        <p>当サイトは第三者配信の広告サービス「Google AdSense（グーグルアドセンス）」を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。</p>
-        
-        <h3>2. アクセス解析ツールについて</h3>
-        <p>当サイトでは、サービスの向上を目的としてアクセス状況の分析を行う場合があります。この際、IPアドレス等の情報が収集される可能性がありますが、個人を特定するものではありません。</p>
-        
-        <h3>3. 免責事項</h3>
-        <p>当アプリのコンテンツ（スペイン語の訳語等）については、細心の注意を払っておりますが、その正確性や安全性を保証するものではありません。当アプリを利用したことによって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
-        
-        <p style="margin-top: 20px; text-align: center;">
-            <button onclick="document.getElementById('policy-modal').style.display='none'" style="padding: 10px 20px; background: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer;">閉じる</button>
-        </p>
+        function nextWord() { 
+            currentIndex = (currentIndex + 1) % vocabulary.length; 
+            updateDisplay(); 
+        }
+
+        function prevWord() { 
+            currentIndex = (currentIndex - 1 + vocabulary.length) % vocabulary.length; 
+            updateDisplay(); 
+        }
+
+        // 音声ボタン専用（手動で鳴らす時）
+        function playVoice() {
+            const item = vocabulary[currentIndex];
+            speak(item.sp);
+        }
+
+        // --- 初期化 ---
+        window.onload = updateDisplay;
+
+        // iPhoneで音声を準備するためのおまじない
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+
+        // iPhoneの制限（一度タップしないと音が出ない）を解除する
+        document.body.addEventListener('touchstart', function() {
+            const silent = new SpeechSynthesisUtterance("");
+            synth.speak(silent);
+        }, { once: true });
+    </script>
+
+    <div style="text-align:center; margin-top:30px; padding-bottom: 20px;">
+        <p style="font-size: 14px; color: #888;">このアプリを友達に教える</p>
+        <a href="https://twitter.com/share?url=https://tamagotamagotamago111-spec.github.io/&text=無料スペイン語学習アプリ「Spanish Master 1200」で勉強中！" target="_blank" style="background:#1DA1F2; color:white; padding:10px 20px; text-decoration:none; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:20px;">Xでシェア</a>
+        <br>
+        <a href="javascript:void(0)" onclick="document.getElementById('policy-modal').style.display='block'" style="color: #666; text-decoration: none; font-size: 12px;">プライバシーポリシー・免責事項</a>
     </div>
-</div>
+
+    <div id="policy-modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+        <div style="background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 10px; line-height: 1.6; font-size: 14px; color: #333; position: relative;">
+            <span onclick="document.getElementById('policy-modal').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <h2>プライバシーポリシー・免責事項</h2>
+            <h3>1. 広告の配信について</h3>
+            <p>当サイトは第三者配信の広告サービス「Google AdSense」を利用しています。Cookieを使用してユーザーの興味に応じた広告を表示することがあります。</p>
+            <h3>2. 免責事項</h3>
+            <p>当アプリのコンテンツの正確性については細心の注意を払っておりますが、利用によって生じた損害等の一切の責任を負いかねます。</p>
+            <div style="text-align:center; margin-top:20px;">
+                <a href="https://forms.gle/abc12345" target="_blank" style="color:#666; font-size:14px;">お問い合わせ</a>
+                <br><br>
+                <button onclick="document.getElementById('policy-modal').style.display='none'" style="padding: 10px 20px; background: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer;">閉じる</button>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
-<div style="text-align:center; margin-top:30px;">
-    <p style="font-size: 14px; color: #888;">このアプリを友達に教える</p>
-    <a href="https://twitter.com/share?url=https://tamagotamagotamago111-spec.github.io/&text=無料スペイン語学習アプリ「Spanish Master 1200」で勉強中！" target="_blank" style="background:#1DA1F2; color:white; padding:10px 20px; text-decoration:none; border-radius:20px; font-weight:bold;">Xでシェア</a>
-</div>
 
 
 
