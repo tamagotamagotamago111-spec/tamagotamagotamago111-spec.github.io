@@ -3,55 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Spanish Master 1200</title>
+    <title>Spanish Vocabulary Master 1500</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
     <style>
-        :root { --primary: #ff4757; --secondary: #2ed573; --bg: #f8f9fa; --text: #2f3542; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        :root { --primary: #ff4757; --secondary: #2ed573; --bg: #f1f2f6; --text: #2f3542; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* ヘッダーとジャンプボタン */
-        .header { background: #fff; width: 100%; padding: 15px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; }
-        .header-title { font-weight: 900; color: var(--text); font-size: 20px; }
-        .jump-btn { position: absolute; right: 15px; top: 12px; background: var(--primary); color: white; padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; }
+        /* ヘッダー */
+        .header { background: #fff; width: 100%; padding: env(safe-area-inset-top) 0 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .header-title { font-weight: 900; font-size: 20px; color: var(--text); }
+        .jump-btn { position: absolute; right: 15px; bottom: 12px; background: var(--text); color: white; padding: 6px 12px; border-radius: 12px; font-size: 13px; border: none; font-weight: bold; }
 
-        .card { width: 90%; max-width: 400px; height: 380px; background: white; border-radius: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center; padding: 20px; box-sizing: border-box; margin-top: 20px; }
-        .icon-box { font-size: 80px; color: var(--primary); margin-bottom: 20px; }
-        .sp-text { font-size: 38px; font-weight: 900; color: var(--text); margin: 10px 0; }
-        .jp-text { font-size: 24px; color: var(--secondary); font-weight: 700; height: 32px; }
+        /* カードエリア */
+        .card { width: 90%; max-width: 420px; height: 400px; background: white; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; margin-top: 30px; transition: transform 0.1s; position: relative; }
+        .card:active { transform: scale(0.98); }
         
-        .controls { display: flex; gap: 15px; width: 90%; max-width: 400px; margin-top: 20px; }
-        .btn { flex: 1; padding: 18px 0; border-radius: 20px; border: none; color: white; font-size: 18px; font-weight: 800; cursor: pointer; }
-        .btn-prev { background: #a4b0be; }
-        .btn-next { background: var(--text); }
+        /* ピクトグラム */
+        .icon-box { font-size: 110px; color: var(--primary); margin-bottom: 20px; }
+        .sp-text { font-size: 42px; font-weight: 900; color: var(--text); text-align: center; padding: 0 10px; }
+        .jp-text { font-size: 26px; color: var(--secondary); font-weight: 700; height: 35px; margin-top: 15px; }
         .hidden { visibility: hidden; opacity: 0; }
-        .counter { margin-top: 15px; color: #747d8c; font-weight: bold; }
+
+        /* 番号表示 */
+        .counter { margin-top: 15px; font-weight: bold; color: #a4b0be; }
+
+        /* 操作パネル */
+        .controls { display: flex; gap: 15px; width: 90%; max-width: 420px; margin-top: 25px; }
+        .btn { flex: 1; padding: 22px 0; border-radius: 25px; border: none; color: white; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 0 rgba(0,0,0,0.1); }
+        .btn-prev { background: #a4b0be; }
+        .btn-next { background: var(--primary); }
+
+        /* 収益化：広告スペース */
+        .ad-container { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+        .ad-label { font-size: 10px; color: #ccc; margin-bottom: 5px; }
+        .ad-slot { width: 320px; height: 50px; background: #e0e0e0; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
     </style>
 </head>
 <body>
+
     <div class="header">
-        <span class="header-title">SPANISH MASTER</span>
-        <button class="jump-btn" onclick="jumpTo()"># ジャンプ</button>
+        <span class="header-title">ESPAÑOL 1500</span>
+        <button class="jump-btn" onclick="jumpTo()"># Jump</button>
     </div>
     
-    <div class="card" onclick="toggleAnswer()">
+    <div class="card" id="mainCard" onclick="toggleAnswer()">
         <span class="material-symbols-rounded icon-box" id="icon">school</span>
         <div class="sp-text" id="sp">Cargando...</div>
         <div class="jp-text hidden" id="jp">読み込み中...</div>
     </div>
 
-    <div class="counter" id="counter">0 / 0</div>
+    <div class="counter" id="counter">0 / 1500</div>
 
     <div class="controls">
-        <button class="btn btn-prev" onclick="prevWord()">戻る</button>
-        <button class="btn btn-next" onclick="nextWord()">次へ</button>
+        <button class="btn btn-prev" onclick="prevWord()">ATRÁS</button>
+        <button class="btn btn-next" onclick="nextWord()">SIGUIENTE</button>
+    </div>
+
+    <div class="ad-container">
+        <div class="ad-label">ADVERTISEMENT</div>
+        <div class="ad-slot" id="ad-slot">
+            Banner Ad Space
+        </div>
     </div>
 
     <script>
-    // 1200語のデータをここに入れてください
+    /**
+     * 1500語のデータバンク
+     * ここにあなたの持っているデータを流し込んでください
+     */
     const vocabulary = [
-        {sp: "Hola", jp: "こんにちは", icon: "handshake"},
-        {sp: "Gracias", jp: "ありがとう", icon: "volunteer_activism"},
-       "Hola", jp: "こんにちは", icon: "handshake"},
+        "Hola", jp: "こんにちは", icon: "handshake"},
         {sp: "Gracias", jp: "ありがとう", icon: "volunteer_activism"},
         {sp: "Sí", jp: "はい", icon: "check_circle"},
         {sp: "No", jp: "いいえ", icon: "cancel"},
@@ -1085,60 +1106,95 @@
         {sp: "Legado", jp: "遺産", icon: "history_edu"},
         {sp: "Horizonte", jp: "地平線", icon: "wb_twilight"},
         {sp: "Infinito", jp: "無限", icon: "all_inclusive"}
-    ];
 
     let currentIndex = 0;
-    let voices = [];
+    let synth = window.speechSynthesis;
+    let spanishVoice = null;
 
-    // 音声の準備
-    function setVoices() {
-        voices = window.speechSynthesis.getVoices();
+    // 音声の準備：スマホでもネイティブに近い声を選択する
+    function loadVoices() {
+        const voices = synth.getVoices();
+        // 1. Googleのスペイン語音声（非常に高品質） 2. Premium音声 3. 一般的なスペイン語音声 の順に探す
+        spanishVoice = voices.find(v => v.lang.startsWith('es') && v.name.includes('Google')) || 
+                       voices.find(v => v.lang.startsWith('es') && v.name.includes('Premium')) ||
+                       voices.find(v => v.lang.startsWith('es')) || null;
     }
-    window.speechSynthesis.onvoiceschanged = setVoices;
-    setVoices();
+    
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
 
     function speak(text) {
         if (!text) return;
-        window.speechSynthesis.cancel();
+        synth.cancel(); // 前の音声を即座に停止して詰まりを防止
+
         const uttr = new SpeechSynthesisUtterance(text);
+        uttr.voice = spanishVoice;
+        uttr.lang = 'es-ES'; // スペイン（欧州）発音。中南米が良い場合は es-MX
+        uttr.rate = 0.85;    // ネイティブに近いが、学習者が聞き取りやすい絶妙な速度
+        uttr.pitch = 1.0;
         
-        // スペイン語の音声を探す
-        const spanishVoice = voices.find(v => v.lang.startsWith('es') && (v.name.includes('Google') || v.name.includes('Premium'))) || 
-                             voices.find(v => v.lang.startsWith('es')) || null;
-        if (spanishVoice) uttr.voice = spanishVoice;
-        
-        uttr.lang = 'es-ES';
-        uttr.rate = 0.9;
-        window.speechSynthesis.speak(uttr);
+        // スマホの「マナーモード」でも再生されるよう、SpeechSynthesisはユーザー操作（クリック）に反応させる
+        synth.speak(uttr);
     }
 
     function updateDisplay() {
         const item = vocabulary[currentIndex];
-        document.getElementById('sp').innerText = item.sp;
+        const spDisplay = document.getElementById('sp');
+        
+        // 文字数に応じてフォントサイズを自動調整
+        spDisplay.style.fontSize = item.sp.length > 12 ? "32px" : "42px";
+        
+        spDisplay.innerText = item.sp;
         document.getElementById('jp').innerText = item.jp;
-        document.getElementById('icon').innerText = item.icon || "school";
+        document.getElementById('icon').innerText = item.icon || "category";
+        
+        // 画面リセット
         document.getElementById('jp').classList.add('hidden');
         document.getElementById('counter').innerText = `${currentIndex + 1} / ${vocabulary.length}`;
+        
+        // ネイティブ発音実行
         speak(item.sp);
     }
 
-    // ★任意の番号にジャンプする機能
+    // 番号指定ジャンプ機能
     function jumpTo() {
-        const input = prompt(`何番の単語に飛びますか？ (1〜${vocabulary.length})`);
+        const input = prompt(`どの番号にジャンプしますか？ (1～${vocabulary.length})`);
         const num = parseInt(input);
-        if (!isNaN(num) && num >= 1 && num <= vocabulary.length) {
+        if (num >= 1 && num <= vocabulary.length) {
             currentIndex = num - 1;
             updateDisplay();
-        } else if (input !== null) {
-            alert("正しい番号を入力してください");
+        } else if (input) {
+            alert("正しい番号を入力してください。");
         }
     }
 
-    function toggleAnswer() { document.getElementById('jp').classList.toggle('hidden'); }
-    function nextWord() { currentIndex = (currentIndex + 1) % vocabulary.length; updateDisplay(); }
-    function prevWord() { currentIndex = (currentIndex - 1 + vocabulary.length) % vocabulary.length; updateDisplay(); }
+    function toggleAnswer() { 
+        document.getElementById('jp').classList.toggle('hidden'); 
+    }
 
-    window.onload = () => { if (vocabulary.length > 0) updateDisplay(); };
+    function nextWord() { 
+        currentIndex = (currentIndex + 1) % vocabulary.length; 
+        updateDisplay(); 
+    }
+
+    function prevWord() { 
+        currentIndex = (currentIndex - 1 + vocabulary.length) % vocabulary.length; 
+        updateDisplay(); 
+    }
+
+    // キーボード操作対応（PC確認用）
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "ArrowRight") nextWord();
+        if (e.key === "ArrowLeft") prevWord();
+        if (e.key === " ") toggleAnswer();
+    });
+
+    // 起動
+    window.onload = () => {
+        loadVoices();
+        if (vocabulary.length > 0) updateDisplay();
+    };
     </script>
 </body>
 </html>
