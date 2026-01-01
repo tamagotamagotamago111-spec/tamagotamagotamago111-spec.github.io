@@ -44,25 +44,38 @@
 
     let currentIndex = 0;
 
-    // 音声を再生する関数（MP3を優先して流す設定）
-    function speak(text) {
-        if (!text) return;
-        
-        // ファイル名用に変換 (例: "Buenos días" -> "buenos_dias.mp3")
-        const fileName = text.toLowerCase()
-                             .replace(/ /g, "_")
-                             .replace(/[¿?¡!]/g, "");
-        
-        const audio = new Audio(`audio/${fileName}.mp3`);
+   // スマホの音声準備を待つための設定
+let voices = [];
+function setVoices() {
+    voices = window.speechSynthesis.getVoices();
+}
+window.speechSynthesis.onvoiceschanged = setVoices;
 
-        audio.play().catch(() => {
-            // MP3がない場合のみスマホの合成音声を使用
-            const uttr = new SpeechSynthesisUtterance(text);
-            uttr.lang = 'es-ES';
-            window.speechSynthesis.speak(uttr);
-        });
+function speak(text) {
+    if (!text) return;
+
+    // 1. すでに喋っている場合はキャンセル（重なり防止）
+    window.speechSynthesis.cancel();
+
+    const uttr = new SpeechSynthesisUtterance(text);
+    
+    // 2. スペイン語の音声を強制指定
+    // スマホに入っている「一番いい声」を探す
+    const spanishVoice = voices.find(v => v.lang.startsWith('es') && v.name.includes('Google')) || 
+                         voices.find(v => v.lang.startsWith('es')) ||
+                         null;
+
+    if (spanishVoice) {
+        uttr.voice = spanishVoice;
     }
 
+    uttr.lang = 'es-ES'; // スペイン（欧州）の発音
+    uttr.rate = 0.9;     // 少しゆっくり（聞き取りやすく）
+    uttr.pitch = 1.0;
+
+    // 3. 再生
+    window.speechSynthesis.speak(uttr);
+}
     function updateDisplay() {
         const item = vocabulary[currentIndex];
         document.getElementById('sp').innerText = item.sp;
