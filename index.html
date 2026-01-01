@@ -1113,7 +1113,7 @@
     const synth = window.speechSynthesis;
 
     // 高品質な音声を選択する強化版関数
-    function speak(text) {
+   function speak(text) {
         // 合成音声ではなく、audioフォルダ内のmp3を再生する
         const fileName = text.toLowerCase().replace(/ /g, "_");
         const audio = new Audio(`audio/${fileName}.mp3`);
